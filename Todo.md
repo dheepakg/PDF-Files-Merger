@@ -1,4 +1,10 @@
 ### Things todo
+Code cleanup
+- [ ] Try Catch module
+- [ ] Add logging
+- [ ] Pylint
+- [ ] Test the module
+
 Use Pyinstaller
 - [ ] Build msi file
 
