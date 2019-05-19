@@ -1,7 +1,9 @@
 from tkinter import Tk, Text, BOTH, W, N, E, S, filedialog, END, StringVar
 from tkinter.ttk import Frame, Button, Label, Style
 from pathlib import PurePath
+from PyPDF2 import PdfFileMerger, PdfFileReader
 
+defaultFilePath = "/home/dheepak/Desktop"
 
 class Example(Frame):
     """GUI Component"""
@@ -9,14 +11,13 @@ class Example(Frame):
     def __init__(self):
         super().__init__()
         self.f_initUI()
-        self.defaultFilePath = "/home/dheepak/Desktop"
+
         self.list_fileName = []
         self.dict_fileNameInOrder = dict()
         self.dict_fileDetailsInOrder = dict()
         self.var_contents = ''
 
     def f_initUI(self):
-
         self.var = StringVar()
         self.var.set(" ")
         self.master.title("FileMerger")
@@ -39,7 +40,7 @@ class Example(Frame):
         removeButton = Button(self, text="Remove", command=self.f_removeLastFile)
         removeButton.grid(row=2, column=3)
 
-        mergeButton = Button(self, text="Merge", command=self.f_mergeFiles)
+        mergeButton = Button(self, text="Merge", command=self.f_mergePDF)
         mergeButton.grid(row=3, column=3, pady=4)
 
         helpButton = Button(self, text="Help")
@@ -50,7 +51,7 @@ class Example(Frame):
 
     def f_selectFiles(self):
         """Used to select PDF files from  defaultFilePath"""
-        self.pdfFile = filedialog.askopenfilename(filetypes=[("PDF files", "*.pdf")], initialdir = self.defaultFilePath)
+        self.pdfFile = filedialog.askopenfilename(filetypes=[("PDF files", "*.pdf")], initialdir = defaultFilePath)
         self.list_fileName.append(self.pdfFile)
 
         self.var_contents = self.var_contents + '\n' + PurePath(self.pdfFile).name
@@ -58,18 +59,27 @@ class Example(Frame):
         self.dict_fileDetailsInOrder[len(self.list_fileName)] = self.pdfFile
 
     def f_removeLastFile(self):
-        """Reset selection"""
+        """Remove last selected file"""
         self.var_contents = ""
-        #Removing file from list
+#        Removing file from list
         self.list_fileName.pop()
-        #Displaying updated file-list in the GUI
+#        Displaying updated file-list in the GUI
         for filename in self.list_fileName:
             self.var_contents = self.var_contents + '\n' + PurePath(filename).name
         self.var.set(self.var_contents)
 
-    def f_mergeFiles(self):
-        """Merge files"""
-        print(self.list_fileName)
+    def f_mergePDF(self):
+
+        merger = PdfFileMerger()
+        for filename in self.list_fileName:
+            merger.append(PdfFileReader(filename, 'rb'))
+
+        merger.write("/home/dheepak/Desktop/document-output.pdf")
+
+        self.var_contents = self.var_contents + "\nFiles are merged!"
+        self.var.set(self.var_contents)
+
+
 
 
 def main():
