@@ -1,6 +1,7 @@
 ### Things todo
 
 Code cleanup
+- [ ] Raise an alert when less than 2 files are selected
 - [ ] Try Catch module
 - [ ] Add logging
 - [ ] Pylint
