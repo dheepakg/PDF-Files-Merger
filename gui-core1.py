@@ -70,14 +70,19 @@ class Example(Frame):
 
     def f_mergePDF(self):
 
-        merger = PdfFileMerger()
-        for filename in self.list_fileName:
-            merger.append(PdfFileReader(filename, 'rb'))
+        if len(self.list_fileName) < 2:
+            print("Not enough files")
+            self.var_contents = self.var_contents + "\nSelect atleast 2 files to merge"
+            self.var.set(self.var_contents)
+        else:
+            merger = PdfFileMerger()
+            for filename in self.list_fileName:
+                merger.append(PdfFileReader(filename, 'rb'))
 
-        merger.write("/home/dheepak/Desktop/document-output.pdf")
+            merger.write("/home/dheepak/Desktop/document-output.pdf")
 
-        self.var_contents = self.var_contents + "\nFiles are merged!"
-        self.var.set(self.var_contents)
+            self.var_contents = self.var_contents + "\nFiles are merged!"
+            self.var.set(self.var_contents)
 
 
 
