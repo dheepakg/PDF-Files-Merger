@@ -1,14 +1,16 @@
 ### Things todo
 
 Code cleanup
-- [ ] Raise an alert when less than 2 files are selected
+- [x] Raise an alert when less than 2 files are selected
 - [ ] Try Catch module
 - [ ] Add logging
 - [ ] Pylint
 - [ ] Test the module
 
 Use Pyinstaller
-- [ ] Build msi file
+- [x] Single-file executable was built for Linux
+- [ ] Single-file executable was built for Windows
+- [ ] Single-file executable was built for Mac OS
 
 Help button
 - [ ] Help button is unassigned. Assign some activity
