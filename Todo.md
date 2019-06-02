@@ -2,6 +2,7 @@
 
 Code cleanup
 - [x] Raise an alert when less than 2 files are selected
+- [ ] Add generic output path
 - [ ] Try Catch module
 - [ ] Add logging
 - [ ] Pylint
