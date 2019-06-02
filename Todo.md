@@ -4,7 +4,7 @@ Code cleanup
 - [x] Raise an alert when less than 2 files are selected
 - [x] Add generic output path
 - [ ] Try Catch module
-- [ ] Add logging
+- [x] Add logging
 - [ ] Pylint
 - [ ] Test the module
 
