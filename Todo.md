@@ -2,7 +2,7 @@
 
 Code cleanup
 - [x] Raise an alert when less than 2 files are selected
-- [ ] Add generic output path
+- [x] Add generic output path
 - [ ] Try Catch module
 - [ ] Add logging
 - [ ] Pylint
@@ -11,7 +11,7 @@ Code cleanup
 Use Pyinstaller
 - [x] Single-file executable was built for Linux
 - [ ] Single-file executable was built for Windows
-- [ ] Single-file executable was built for Mac OS
+- [x] Single-file executable was built for Mac OS
 
 Help button
 - [ ] Help button is unassigned. Assign some activity

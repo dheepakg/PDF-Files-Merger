@@ -1,7 +1,10 @@
-from tkinter import Tk, Text, BOTH, W, N, E, S, filedialog, END, StringVar
-from tkinter.ttk import Frame, Button, Label, Style
+from tkinter import Tk,BOTH, W, filedialog, StringVar
+from tkinter.ttk import Frame, Button, Label
 from pathlib import PurePath
 from PyPDF2 import PdfFileMerger, PdfFileReader
+import os
+import sys
+from datetime import datetime
 
 defaultFilePath = "/home/dheepak/Desktop"
 
@@ -16,6 +19,11 @@ class Example(Frame):
         self.dict_fileNameInOrder = dict()
         self.dict_fileDetailsInOrder = dict()
         self.var_contents = ''
+        # Identifying the os path where the script is running
+        self.abs_file_path = os.path.dirname(sys.argv[0]) + '/'
+        print(self.abs_file_path)
+        self.file_gen_time = datetime.today().strftime('%Y%m%d-%H%M%S')
+
 
     def f_initUI(self):
         self.var = StringVar()
@@ -78,9 +86,8 @@ class Example(Frame):
             merger = PdfFileMerger()
             for filename in self.list_fileName:
                 merger.append(PdfFileReader(filename, 'rb'))
-# Add Generic file path
-            #merger.write("/home/dheepak/Desktop/document-output.pdf")
-            merger.write("/Users/deegee/Desktop/document-output.pdf")
+
+            merger.write(self.abs_file_path + 'Merged on ' +self.file_gen_time + '.pdf')
 
             self.var_contents = self.var_contents + "\nFiles are merged!"
             self.var.set(self.var_contents)
