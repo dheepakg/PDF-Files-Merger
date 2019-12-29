@@ -1,0 +1,7 @@
+name: env_sg
+dependencies:
+  - flake8
+  - black
+  - pip:
+      - pysimplegui
+      - PyPDF2

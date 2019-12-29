@@ -1,34 +1,29 @@
-# import the Flask class from the flask module
-from flask import Flask, render_template, request
-from werkzeug import secure_filename
+import PySimpleGUI as sg
 
 
-# create the application object
-app = Flask(__name__)
+def sgui():
+    sg.theme("Dark Blue 3")  # please make your windows colorful
 
-# use decorators to link the function to a url
-@app.route("/")
-def home():
-    return "Hello, World!"  # return a string
+    layout = [
+        [sg.Text("PDF File Name 1")],
+        [sg.Input(), sg.FileBrowse(file_types=(("PDF Files", "*.pdf"),))],
+        [sg.Text("PDF File Name 2")],
+        [sg.Input(), sg.FileBrowse(file_types=(("PDF Files", "*.pdf"),))],
+        [sg.OK(), sg.Cancel()],
+    ]
 
+    window = sg.Window("PDF File Merger", layout)
 
-@app.route("/upload")
-def welcome():
-    return render_template("upload.html")  # render a template
+    event, values = window.read()
+    window.close()
 
+    files = {1: values["Browse"], 2: values["Browse0"]}
 
-@app.route("/uploader", methods=["GET", "POST"])
-def upload_file():
-    if request.method == "POST":
-        for f in request.files.getlist("photo"):
-            f.save(secure_filename(f.filename))
-        return "file uploaded successfully"
+    if event in ["Ok", "OK"]:
+        sg.popup("Files are Merged")
 
-
-# todo files getiing saved somewherer in drive, should explicitly
-# todo mention the path
+    return files
 
 
-# start the server with the 'run()' method
-if __name__ == "__main__":
-    app.run(debug=True)
+file_dict = sgui()
+print("files dict  is ", file_dict)
